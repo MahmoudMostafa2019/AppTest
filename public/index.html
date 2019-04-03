@@ -3,19 +3,30 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-  <p>Welcome to the chat app</p>
+<body class="chat">
 
-<ol id="messages">
+  <div class="chat__sidebar">
+<h3>people</h3>
+  </div>
+  <div class="chat__main">
+    <ol id="messages" class="chat__messages">
 
-</ol>
-
-<form id="form_mess">
-<input type="text" name="message"  placeholder="enter text u want to send">
-<button >send</button>
-</from>
+    </ol>
+    <div class="chat__footer">
+      <form id="form_mess">
+      <input type="text" name="message" autocomplete="off"  placeholder="enter text u want to send" autofocus>
+    </input>
+      <button >send</button>
+      </from>
 <button id="location-butt">current location</button>
+    </div>
+  </div>
+
+
+
+
 
 
   <script src="/socket.io/socket.io.js"></script>

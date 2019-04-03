@@ -33,7 +33,8 @@ jQuery('#form_mess').on('submit',function (e) {
     from: 'TG',
     text: jQuery('[name=message]').val()
   },function(data){
-    console.log('send successfully.......',data);
+    //console.log('send successfully.......',data);
+    jQuery('[name=message]').val('');
   });
 });
 
@@ -42,15 +43,19 @@ jQuery('#location-butt').on('click',function (e) {
 if (!navigator.geolocation) {
   return alert('not  available');
 }
+jQuery('#location-butt').attr('disabled','disabled').text('Send Location...');
 navigator.geolocation.getCurrentPosition(
   function (postion) {
     console.log('details:',postion);
+      jQuery('#location-butt').removeAttr('disabled').text('Send Location');
     // alert(' available');
     socket.emit('sendCordinates', {
       lat:postion.coords.latitude,
       lang: postion.coords.longitude
   });
+
   },function () {
+    jQuery('#location-butt').removeAttr('disabled').text('Send Location');
       alert('notxcxcxcx available');
   }
 );
