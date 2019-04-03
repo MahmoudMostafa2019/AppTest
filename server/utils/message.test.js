@@ -12,7 +12,7 @@ expect(finalMess).toInclude({from,text});
 });
 
 //---
-describe('generate genLocMessage',()=>{
+describe('generate genLocMessage test',()=>{
   it('should done in all cases',()=>{
 var from='Admin';
 var lat=30.0499;
