@@ -1,5 +1,23 @@
 var socket = io();
 
+
+function scrollToBottom() {
+  var messages=jQuery('#messages');
+  var newMessages=messages.children('li:last-child');
+
+  var scrollHeight= messages.prop('scrollHeight');
+  var scrollTop= messages.prop('scrollTop');
+  var clientHeight= messages.prop('clientHeight');
+
+  var newMessagesHeight= newMessages.innerHeight();
+  var lastMessagesHeight= newMessages.prev().innerHeight();
+if (scrollTop + clientHeight +newMessagesHeight+ lastMessagesHeight>= scrollHeight) {
+  console.log('should sculsd');
+  messages.scrollTop(scrollHeight);
+}
+
+}
+
 socket.on('connect', function () {
   console.log('Connected to server');
 });
@@ -13,6 +31,7 @@ var html=Mustache.render(temp,
  text:message.text
  ,date:dateMoment});
  jQuery('#messages').append(html);
+ scrollToBottom();
   // var dateMoment=moment(message.createAt).format('h:mm a');
   // var li=jQuery('<li></li>');
   // li.text(`from : ${message.from}  text:  ${message.text} ,date ${dateMoment}`);
