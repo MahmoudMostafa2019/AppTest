@@ -20,6 +20,18 @@ if (scrollTop + clientHeight +newMessagesHeight+ lastMessagesHeight>= scrollHeig
 
 socket.on('connect', function () {
   console.log('Connected to server');
+var deparam = jQuery.deparam(window.location.search);
+socket.emit('join',deparam,function(err){
+  if (err) {
+    console.log('error found in acknowledge function');
+    alert(err);
+    window.location.href='/'
+  }else {
+    console.log('not Error');
+  }
+})
+
+
 });
 
 socket.on('newMess', function (message) {

@@ -4,6 +4,8 @@ const express = require('express');
 const socketIO = require('socket.io');
 var {genMess,genLocMessage} = require('./utils/message');
 
+var {isRealString} = require('./utils/validation.js');
+
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
 var app = express();
@@ -18,6 +20,16 @@ io.on('connection', (socket) => {
   socket.emit('newMess',genMess('Admin','Welcome to our Chat group'));
 
   socket.broadcast.emit('newMess',genMess('Admin','new user join'));
+
+socket.on('join',(param,callback)=>{
+console.log('param',param);
+console.log('userName',isRealString(param.userName),'roomName:',isRealString(param.roomName));
+console.log('type:',typeof(param.userName));
+if (!isRealString(param.userName)||!isRealString(param.roomName)) {
+  callback('U should Enter userName and also room name');
+}
+callback();
+})
 
   socket.on('createMess', (test,callback) => {
     console.log('server User Data',test);
