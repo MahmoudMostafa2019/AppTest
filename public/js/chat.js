@@ -50,6 +50,16 @@ var html=Mustache.render(temp,
   // jQuery('#messages').append(li);
 });
 
+
+socket.on('updateUserList', function (message) {
+var ol=jQuery('<ol></lo>');
+message.forEach(function (messages) {
+  ol.append(jQuery('<li></li>').text(messages));
+});
+
+  jQuery('#user').html(ol);
+});
+
 socket.on('genLocMess', function (message) {
   var dateMoment=moment(message.createAt).format('h:mm a');
   var temp=jQuery('#template_id_loc').html();
